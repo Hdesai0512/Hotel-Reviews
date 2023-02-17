@@ -8,10 +8,26 @@ const reviewsRouters= require('./controllers/reviews')
 
 const app = express();
 
+// MIDDLEWARE
+app.set('views', __dirname +'/views')
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
+
+
+
+app.get('/', (req, res) => {
+    res.send('<h1>main page</h1>')
+})
+const reviewsController= require('./controllers/reviews')
+app.use('/reviews', reviewsController)
+
 
 //Routes
-
+//app.use('/reviewers', reviewersRouters)
+//app.use('/reviews', reviewsRouters)
 const PORT = process.env.PORT || 8080;
+
+
 // db connection
 mongoose.set('strictQuery', true)
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true})
