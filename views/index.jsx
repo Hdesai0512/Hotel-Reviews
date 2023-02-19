@@ -1,7 +1,7 @@
-const React= require('react')
+const React = require('react')
 const Default = require('./layouts/default')
 
-function Index(){
+function Index({reviews}){
     return (
         <Default>
             <h2>Index Page</h2>
