@@ -4,7 +4,7 @@ const Default = require('./layouts/Default')
 function New () {
     return (
       <Default>
-        <h2>Add a new Hotel <Review></Review></h2>
+        <h2>Add a new Hotel Review</h2>
         <div className="backButton">
             <a href="/reviews"><button>Go back</button></a>
         </div>
@@ -29,6 +29,14 @@ function New () {
                 id="hasReviews"
                 defaultChecked
                 />
+            <label htmlFor="reviewer">Reviewers</label>
+            <select name="reviewer" id="reviewer">
+                <option value= "Richard">Richard</option>
+                <option value= "Eric">Eric</option>
+                <option value= "Lloyd">Lloyd</option>
+                <option value= "Harsh">Harsh</option>
+                <option value= "Roberto">Roberto</option>
+            </select>
             <br />
             <input type="submit"/>
         </form>
