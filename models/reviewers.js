@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const {Schema} = mongoose
-
+const reviewers = ('./reviews')
 const reviewerSchema = new Schema ({
         name: {
             type: String,
@@ -13,6 +13,11 @@ const reviewerSchema = new Schema ({
         }
 })
 
+reviewerSchema.virtual('reviews', {
+        ref:'Reviews',
+        localField: '_id',
+        foreignField: 'reviewers'
+}, {toJSON: {virtuals: true}})
 
 
 

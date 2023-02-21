@@ -3,21 +3,22 @@ const express = require('express')
 const reviews = express.Router()
 const Reviews = require('../models/reviews')
 const Reviewers = require('../models/reviewers')
+const reviewers = require('./reviewers')
 
-reviews.get('/', (req,res) => {
-    Reviews.findById(req.params.id)
-        .then(foundReviews => {
-           res.render('show', {
-            reviews: foundReviews
-           })
-        })
-        .catch(err =>{
-            res.send('404')
-        })
-})
 
-reviews.get('/:arrayIndex',(req,res) =>{
-    res.send(Reviews[req.params.arrayIndex])
+
+reviews.get('/',(req,res) =>{
+    Reviewers.find()
+        .then(foundReviewers => {
+            Reviews.find()
+            .then(foundReviews => {
+                res.render('index',{
+                    reviews:foundReviews,
+                    reviewers: foundReviewers,
+                    title: 'Index Page'
+                })
+            })
+        })
 })
 //Show
 reviews.get('/id', (req, res) =>{
