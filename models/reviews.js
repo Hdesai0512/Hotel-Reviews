@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema} = mongoose
 
 const reviewsSchema = new Schema({
-    hotelName: {
+    name: {
         type: String,
         require: true
     },
@@ -14,17 +14,17 @@ const reviewsSchema = new Schema({
         type: String,
         default: 'https://unsplash.com/photos/lw3Lqe2K7xc'
     },
-    Review:{
-        type: String,
-        require: true
-    
-    },
     reviewers:{
-        type: String,
-        enum: ['Richard', 'Eric', 'Lloyd', 'Harsh', 'Roberto']
+        type: Schema.Types.ObjectID,
+        ref: 'Reviewer'
+        
     }
     
     
     })
+    //helper method
+    reviewsSchema.methods.getReviewedBy= function(){
+        return `${this.name} was certified and reviewed by ${this.reviewers}`
+    }
     const reviews = mongoose.model('Reviews', reviewsSchema)
     module.exports = reviews

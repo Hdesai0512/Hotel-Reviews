@@ -23,9 +23,16 @@ app.use(express.urlencoded({extended: true}))
 app.get('/', (req, res) => {
     res.send('<h1>main page</h1>')
 })
+//Reviews page
 const reviewsController= require('./controllers/reviews')
 app.use('/reviews', reviewsController)
 
+//Reviewers Page
+const reviewersController = require('./controllers/reviewers')
+app.use('/reviewers', reviewersController)
+
+
+// 404 page
 app.get('*', (req,res) => {
     res.send('404')
 })

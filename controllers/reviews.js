@@ -2,6 +2,7 @@
 const express = require('express')
 const reviews = express.Router()
 const Reviews = require('../models/reviews')
+const Reviewers = require('../models/reviewers')
 
 reviews.get('/', (req,res) => {
     Reviews.findById(req.params.id)
@@ -21,6 +22,7 @@ reviews.get('/:arrayIndex',(req,res) =>{
 //Show
 reviews.get('/id', (req, res) =>{
     Reviews.findById(req.params.id)
+    .populate('reviewers')
     .then(foundReviews => {
         const ReviewedBy= foundReviews.getReviewedBy()
         console.log(ReviewedBy)
@@ -52,7 +54,13 @@ reviews.post('/', (req,res) =>{
 
 // New
  reviews.get('/new', (req,res) =>{
-    res.render('new')
+    Reviewers.find()
+        .then(foundReviewers =>{
+            res.render('new',{
+                Reviewers: foundReviewers 
+            })
+        })
+  
  })
 
  //UPDATE
@@ -68,10 +76,15 @@ reviews.post('/', (req,res) =>{
 
 //EDIT
 reviews.get('/:id/edit', (req,res) =>{
-    Reviews.findById(req.params.id)
-    .then(foundReviews =>{
-        res.render('edit', {
-            reviews: foundReviews
+    Reviewers.find()
+        .then(foundReviewers =>{
+            Reviews.findById(req.params.id)
+            .then(foundReviews =>{
+                res.render('edit', {
+                    reviews: foundReviews,
+                    Reviewers: foundReviewers
+        })
+   
 
     })
     
