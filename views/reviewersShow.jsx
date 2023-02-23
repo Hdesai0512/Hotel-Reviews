@@ -1,5 +1,6 @@
 const React = require('react')
 const reviewers = require('../controllers/reviewers')
+const reviewersSeed= require('../models/reviewers_seed')
 const Default = require('./layouts/default')
 
 
@@ -7,7 +8,9 @@ function Show ({reviewers}) {
     return (
         <Default>
             <h3>{reviewers.name}</h3>
-            <p>{reviewers.name} has reviewed many properties including {reviewers.bio}</p>
+            <p>{reviewers.name} 
+            </p>
+            <p>About {reviewers.name}: {reviewers.bio}</p>
         </Default>
     )
     }

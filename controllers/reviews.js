@@ -34,7 +34,7 @@ reviews.get('/id', (req, res) =>{
 })
 
 //CREATE
-reviews.post('/', (req,res) =>{
+reviews.post('/', async (req,res) =>{
    if(!req.body.image) {
     req.body.image= "'https://unsplash.com/photos/lw3Lqe2K7xc'"
    }
@@ -46,10 +46,9 @@ reviews.post('/', (req,res) =>{
     }
     Reviews.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(updateReviews => {
-        console.log(updatedReview)
         res.redirect(`/reviews/${req.params.id}`)
     })
-    reviews.push(req.body)
+   await reviews.create(req.body)
     res.redirect('/reviews')
 })
 

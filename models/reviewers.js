@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const {Schema} = mongoose
-const reviewers = ('./reviews')
+const reviews = ('./reviews')
+const reviewersSeed= ('./reviewers_seed.js')
 const reviewerSchema = new Schema ({
         name: {
             type: String,

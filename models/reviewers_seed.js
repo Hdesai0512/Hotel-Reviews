@@ -1,23 +1,23 @@
 module.exports = [
     {
       name: 'Richard',
-      bio: 'Prefers napkins folded a particular way.'
+      bio: 'has reviewed 5 hotels and his favorite properties are Choice properties.'
     },
     {
       name: 'Eric',
-      bio: 'Loves dinosaurs. Is currently on a break.'
+      bio: 'Loves Marriots and has reviewed 10 Marriot properties.'
     },
     {
       name: 'Lloyd',
-      bio: 'Does NOT share food. Recommends that you read Little Women.'
+      bio: 'Does NOT like choice properties and rather stay at Wydnaham properties where he has reviewed 8 properties.'
     },
     {
       name: 'Harsh',
-      bio: 'Fierce protector of the bakerys smelly cat.'
+      bio: 'loves independent proprties and has reviwed 12 independent properties.'
     },
     {
       name: 'Roberto',
-      bio: 'Thinks chewing gum is perfection. Honestly, could it BE any better?'
+      bio: 'like Eric loves Marriot properties and have reviewed 8 of them'
     },
    
   ]
