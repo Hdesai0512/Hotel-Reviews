@@ -10,8 +10,8 @@ function Index({reviews, reviewers, title}){
                 {
                     reviewers.map((reviewer)=>{
                         return (
-                            <li key={reviewer.id}>
-                                <a href= {`/reviewers/${reviewer.id}`}>{reviewer.name}</a>
+                            <li key={reviewer._id}>
+                                <a href= {`/reviewers/${reviewer._id}`}>{reviewer.name}</a>
                             </li>
                         )
                     })

@@ -24,7 +24,7 @@ reviewers.get('/:id', (req,res) => {
     Reviewers.findById(req.params.id)
         .populate('reviews')
         .then(foundReviewers => {
-            res.render('reviewerShow', {
+            res.render('reviewersShow', {
                 reviewers: foundReviewers
             })
         })

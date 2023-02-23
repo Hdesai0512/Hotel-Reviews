@@ -2,7 +2,7 @@ const React = require('react')
 const Reviewer = require('../models/reviewers')
 const Default = require('./layouts/Default')
 
-function New (reviewers) {
+function New (Reviewer) {
     return (
       <Default>
         <h2>Add a new Hotel Review</h2>
@@ -30,11 +30,11 @@ function New (reviewers) {
                 id="hasReviews"
                 defaultChecked
                 />
-            <label htmlFor="reviewer">Reviewers</label>
-            <select name="reviewer" id="reviewer">
-               {reviewers.map((reviewers) =>{
+            <label htmlFor="Reviewer">Reviewers</label>
+            <select name="Reviewer" id="Reviewer">
+               {Reviewer.map(Reviewer =>{
                     return(
-                        <option value={reviewers.id} key={reviewers.id}>{reviewers.name}</option>
+                        <option value={Reviewer.id} key={Reviewer.id}>{Reviewer.name}</option>
                     )
                }
                

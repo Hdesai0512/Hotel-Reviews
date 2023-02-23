@@ -1,5 +1,5 @@
 const React= require('react')
-const reviews = require('../controllers/reviews')
+const reviewers = require('../controllers/reviewers')
 const Default = require('./layouts/default')
 function Show ({reviews}) {
     return (
