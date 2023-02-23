@@ -5,7 +5,7 @@ require('dotenv').config();
 
 
 const reviewersRouters = require('./controllers/reviewers')
-const reviewsRouters= require('./controllers/reviews')
+const reviewsRouters = require('./controllers/reviews')
 
 const app = express();
 
@@ -24,12 +24,11 @@ app.get('/', (req, res) => {
     res.send('<h1>main page</h1>')
 })
 //Reviews page
-const reviewsController= require('./controllers/reviews')
-app.use('/reviews', reviewsController)
-
+//const reviewsController= require('./controllers/reviews')
+app.use('/reviews', reviewsRouters)
 //Reviewers Page
-const reviewersController = require('./controllers/reviewers')
-app.use('/reviewers', reviewersController)
+//const reviewersController = require('./controllers/reviewers')
+app.use('/reviewers',reviewersRouters)
 
 
 // 404 page

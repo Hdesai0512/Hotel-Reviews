@@ -10,7 +10,7 @@ function Show ({reviewers}) {
             <h3>{reviewers.name}</h3>
             <p>{reviewers.name} 
             </p>
-            <p>About {reviewers.name}: {reviewers.bio}</p>
+            <p></p>
         </Default>
     )
     }

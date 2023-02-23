@@ -5,13 +5,26 @@ const reviewer = require('../models/reviewers')
 function Index({reviews, reviewers, title}){
     return (
         <Default title= {title}>
-            <h2>Index Page</h2>
+            <h2>Hotels</h2>
            
             <div className="newButton">
                 <a href='/reviews/new'>
                     <button>Add a New Review</button>
                     </a>
             </div>
+            <h3>Reviews</h3>
+            <ul>
+          {
+                reviews.map((reviews)=>{
+                    return (<li key={reviews}>
+                       <a href={`/reviews/${reviews}`}>
+                       {reviews.name}
+                       </a>
+                   </li>
+                   )
+               })
+            }
+          </ul>
             <h3>Reviewers</h3>
             <ul>
                 {
@@ -24,20 +37,9 @@ function Index({reviews, reviewers, title}){
                     })
                 }
             </ul>
-            <h3>Reviews</h3>
+            
           {/*  <p>I have {reviews[0].name} review!</p> */}
-          <ul>
-          {
-                reviews.map((reviews)=>{
-                    return (<li key={reviews}>
-                       <a href={`/reviews/${reviews}`}>
-                       {reviews.name}
-                       </a>
-                   </li>
-                   )
-               })
-            }
-          </ul>
+         
         </Default>
     )
 }

@@ -32,9 +32,9 @@ function New (reviewers) {
                 />
             <label htmlFor="Reviewer">Reviewers</label>
             <select name="Reviewer" id="Reviewer">
-               {reviewers.map(Reviewer =>{
+               {reviewers.map(reviewer =>{
                     return(
-                        <option value={Reviewer.id} key={Reviewer.id}>{Reviewer.name}</option>
+                        <option value={reviewer.id} key={reviewer.id}>{reviewer.name}</option>
                     )
                }
                

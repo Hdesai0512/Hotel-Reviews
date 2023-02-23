@@ -1,27 +1,19 @@
 // const  router = require('express').Router()
-const express = require('express')
-const reviews = express.Router()
+const router = require('express').Router()
 const Reviews = require('../models/reviews')
 const Reviewers = require('../models/reviewers')
-const reviewers = require('./reviewers')
 
 
-
-reviews.get('/',(req,res) =>{
-    Reviewers.find()
-        .then(foundReviewers => {
-            Reviews.find()
-            .then(foundReviews => {
-                res.render('index',{
-                    reviews:foundReviews,
-                    reviewers: foundReviewers,
-                    title: 'Index Page'
-                })
-            })
+router.get('/', async(req,res) =>{
+    const review = await Reviews.find()
+    const reviewers = await Reviewers.find()
+        res.render('index', {
+            reviews: review,
+            reviewers
         })
 })
 //Show
-reviews.get('/id', (req, res) =>{
+router.get('/id', (req, res) =>{
     Reviews.findById(req.params.id)
     .populate('reviewers')
     .then(foundReviews => {
@@ -34,7 +26,7 @@ reviews.get('/id', (req, res) =>{
 })
 
 //CREATE
-reviews.post('/', async (req,res) =>{
+router.post('/', async (req,res) =>{
    if(!req.body.image) {
     req.body.image= "'https://unsplash.com/photos/lw3Lqe2K7xc'"
    }
@@ -52,52 +44,45 @@ reviews.post('/', async (req,res) =>{
     res.redirect('/reviews')
 })
 
-// New
- reviews.get('/new', (req,res) =>{
-    Reviewers.find()
-        .then(foundReviewers =>{
-            res.render('new',{
-                Reviewers: foundReviewers 
-            })
-        })
-  
+// create a New review
+ router.get('/new', async (req,res) =>{
+    const reviewers = await Reviewers.find()
+    res.render('new', {
+        reviewers 
+    })
  })
 
  //UPDATE
- reviews.put('/:arrayIndex', (req,res) =>{
+ router.put('/:id', async (req,res) =>{
+    const {id} = req.params
+    const {image, hasReviews} = req.body
+    if(!image) req.body.image = 'https://unsplash.com/photos/lw3Lqe2K7xc'
     if(req.body.hasReviews === 'on'){
         req.body.hasReviews = true
      } else {
         req.body.hasReviews = false
     }
-    Reviews[req.params.arrayIndex]= req.body
-    res.redirect(`/reviews/${req.params.arrayIndex}`)
+    await Reviews.deleteMany()
+    res.redirect('reviews')
  })
 
 //EDIT
-reviews.get('/:id/edit', (req,res) =>{
-    Reviewers.find()
-        .then(foundReviewers =>{
-            Reviews.findById(req.params.id)
-            .then(foundReviews =>{
-                res.render('edit', {
-                    reviews: foundReviews,
-                    Reviewers: foundReviewers
-        })
-   
+router.get('/:id/edit', async (req,res) =>{
+    const {id} = req.params
+    const review = await Reviews.findById(id)
+    const reviewers = await Reviewers.findById(id)
+    res.render('edit', {
+        review, reviewers
+    })
 
-    })
-    
-    })
 
 })
 
 //DELETE
-reviews.delete('/:id',  (req, res) => {
-    Reviews.findByIdAndDelete(req.params.id)
-    .then(deleteReviews => {
+router.delete('/:id', async (req, res) => {
+    const {id} = req.params
+    await Reviews.findByIdAndDelete(id)
     res.status(303).redirect('/reviews')
-    })
 })
 
-module.exports = reviews
+module.exports = router
