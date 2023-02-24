@@ -1,37 +1,48 @@
 const React = require('react')
-const Default = require('./layouts/Default')
+const Default = require('./layouts/default')
+const reviewer = require('../models/reviewers')
 
-function Edit ({reviews, index}) {
+function Index({reviews, reviewers, title}){
     return (
-      <Default>
-        <h2>Edit a Hotel</h2>
-        <form action={`/reviews/${index}?_method=PUT`} method="POST">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            required
-            defaultValue={reviews.name}
-          />
-          <label htmlFor="image">Image</label>
-          <input
-            type="text"
-            name="image"
-            id="image"/>
-            defaultValue={reviews.image}
-          <label htmlFor="hasReviews">Has Review?</label>
-          <input
-            type="checkbox"
-            name="hasReviews"
-            id="hasReviews"
-            defaultChecked={reviews.hasReviews}
-          />
-          <br />
-          <input type="submit"/>
-        </form>
-      </Default>
+        <Default title= {title}>
+            <h2>Hotels</h2>
+           
+            <div className="newButton">
+                <a href='/reviews/new'>
+                    <button>Add a New Review</button>
+                    </a>
+            </div>
+            <h3>Reviews</h3>
+            <ul>
+          {
+                reviews.map((reviews)=>{
+                    return (<li key={reviews}>
+                       <a href={`/reviews/${reviews}`}>
+                       {reviews.name}
+                       </a>
+                   </li>
+                   )
+               })
+            }
+          </ul>
+            <h3>Reviewers</h3>
+            <ul>
+                {
+                    reviewers.map((reviewer)=>{
+                        return (
+                            <li key={reviewer._id}>
+                                <a href= {`/reviewers/${reviewer._id}`}>{reviewer.name}</a>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+            
+          {/*  <p>I have {reviews[0].name} review!</p> */}
+         
+        </Default>
     )
 }
 
-module.exports = Edit
+
+module.exports = Index
